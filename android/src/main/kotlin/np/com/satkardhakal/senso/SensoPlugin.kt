@@ -21,7 +21,9 @@ class SensoPlugin: FlutterPlugin {
   /// This local reference serves to register the plugin with the Flutter Engine and unregister it
   /// when the Flutter Engine is detached from the Activity
   private lateinit var gravityChannel: EventChannel
+  private lateinit var deviceRotationChannel: EventChannel
   private lateinit var gravityStreamHandler: StreamHandlerImpl
+  private lateinit var deviceRotStreamHandler: DeviceRoatationStreamHandlerImpl
 
   override fun onAttachedToEngine(@NonNull flutterPluginBinding: FlutterPlugin.FlutterPluginBinding) {
     setupEventChannels(flutterPluginBinding.applicationContext, flutterPluginBinding.binaryMessenger)
@@ -39,10 +41,17 @@ class SensoPlugin: FlutterPlugin {
                 Sensor.TYPE_GRAVITY
         )
         gravityChannel.setStreamHandler(gravityStreamHandler)
+        deviceRotationChannel = EventChannel(messenger, "np.com.satkardhakal/senso/rotation")
+        deviceRotStreamHandler = DeviceRoatationStreamHandlerImpl(
+                sensorsManager,
+                Sensor.TYPE_ROTATION_VECTOR
+        )
+        deviceRotationChannel.setStreamHandler(deviceRotStreamHandler)
     }
 
   private fun teardownEventChannels() {
         gravityChannel.setStreamHandler(null)
+        deviceRotationChannel.setStreamHandler(null)
       
       }
 }

@@ -1,6 +1,5 @@
-import 'package:plugin_platform_interface/plugin_platform_interface.dart';
-
 import 'senso_method_channel.dart';
+import 'package:plugin_platform_interface/plugin_platform_interface.dart';
 
 abstract class SensoPlatform extends PlatformInterface {
   /// Constructs a SensoPlatform.
@@ -18,6 +17,10 @@ abstract class SensoPlatform extends PlatformInterface {
   }
 
   Stream<GravityEvent> get gravityEvents {
+    throw UnimplementedError('gravityEvent has not been implemented.');
+  }
+
+  Stream<RotationEvent> get deviceRotationEvents {
     throw UnimplementedError('gravityEvent has not been implemented.');
   }
 }

@@ -15,10 +15,19 @@ class Senso extends SensoPlatform {
   Stream<GravityEvent> get gravityEvents {
     return _platform.gravityEvents;
   }
+
+  @override
+  Stream<RotationEvent> get deviceRotationEvents {
+    return _platform.deviceRotationEvents;
+  }
 }
 
 final _sensors = Senso();
 
 Stream<GravityEvent> get gravityEvents {
   return _sensors.gravityEvents;
+}
+
+Stream<RotationEvent> get deviceRotationEvents {
+  return _sensors.deviceRotationEvents;
 }
